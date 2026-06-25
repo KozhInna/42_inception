@@ -1,6 +1,9 @@
 #!/bin/sh
 set -eu
 
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld
+
 trim_file() { tr -d '\r\n' < "$1"; }
 need() { eval "v=\${$1:-}"; [ -n "$v" ] || { echo "❌ Missing env: $1" >&2; exit 1; }; }
 
@@ -27,4 +30,4 @@ FLUSH PRIVILEGES;
 EOF
 fi
 
-exec mariadbd-safe
+exec mariadbd --user=mysql
