@@ -15,6 +15,9 @@ all:
 down:
 	docker compose -p $(NAME) -f srcs/docker-compose.yml down --remove-orphans
 
+up:
+	docker compose -p $(NAME) -f srcs/docker-compose.yml --env-file srcs/.env up -d
+
 fclean:
 	docker compose -p $(NAME) -f srcs/docker-compose.yml --env-file srcs/.env down --rmi local --volumes --remove-orphans
 	@if [ -d "/home/innakozhina/data" ]; then sudo rm -rf /home/innakozhina/data; fi
@@ -22,4 +25,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all down fclean re
+.PHONY: all down up fclean re
