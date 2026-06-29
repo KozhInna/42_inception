@@ -73,6 +73,14 @@ make down     # stop containers, keep data
 make fclean   # stop and remove everything including images, volumes, data, /etc/hosts entry
 make re       # fclean + all (full rebuild from scratch)
 ```
+## Docker Compose commands called by Makefile
+
+```bash
+make          # docker compose -p inception -f srcs/docker-compose.yml --env-file srcs/.env up --build
+make up       # docker compose -p inception -f srcs/docker-compose.yml --env-file srcs/.env up -d
+make down     # docker compose -p inception -f srcs/docker-compose.yml down --remove-orphans
+make fclean   # docker compose -p inception -f srcs/docker-compose.yml --env-file srcs/.env down --rmi local --volumes --remove-orphans
+```
 
 ### What happens on first `make`:
 
